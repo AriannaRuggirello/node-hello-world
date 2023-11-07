@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 // la avvio
 dotenv.config();
 
-// creao la porta 
+// creo la porta 
 const port = process.env.PORT || 8000;
 
 // Creo il server
@@ -18,7 +18,8 @@ const server = http.createServer(function(req,res){
     // Devo specificare come il server deve rispondere
     // Invio dati in formato HTML
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-
+    // creo un array vuoto
+    let phraseAlreadyUsed=[];
     // creo un array di frasi
     let phrases =[
         "L'azione è la chiave fondamentale di ogni successo.",
@@ -27,12 +28,15 @@ const server = http.createServer(function(req,res){
         "Ogni giorno è una nuova opportunità. Prendila. Respira e inizia di nuovo." 
     ]
    // Genero un indice per selezionare una frase casuale dall'array
+    // Math.random() è una funzione che restituisce un numero casuale compreso tra 0 (incluso) e 1 (escluso), 
     let i = Math.floor(Math.random() * phrases.length);
 
     //frase dall'array uguale all'indice 
     let phrase = phrases[i];
     // stampo la frase
-    res.end(`<h1>La frase del giorno è: <br> ${phrase}</h1>`);
+    // console.log(`il tuo indirizzo IP è ${process.env.IPADDRESS}`);
+    res.end(`<h1>La frase del giorno è: <br> ${phrase}</h1>
+   <span> il tuo indirizzo IP è ${process.env.IPADDRESS}</span>`);
 });
 
 // avvio il server
